@@ -2,15 +2,26 @@
 # 3 repeats
 # Each of 4 versions
 # 3 different timesteps
-
-for version in "sedov_cstone" "sphexa"
+# Sedov types:
+# "sedov_wone" "sedov_cstone" "sedov_west" "sedov_wisb" "sedov_wser" 
+for rep in 1
 do
-    for timestep in 100
+    for nodes in 4
     do
-        for numthreads in 4 8 16 32 40
-        do
-            ./perftest.sh $version 30 $timestep $numthreads
-            sleep 0.2
+        for size in 100
+        do 
+            for version in "sphexa" "sedov_wone" #"sedov_cstone" # #"sedov_wone" "sedov_cstone" "sedov_wser"
+            do
+                for timestep in 100
+                do
+                    for numthreads in 40
+                    do
+                        ./perftest.sh $version $size $timestep $numthreads $nodes
+                        # sleep 3
+                        # sleep 20
+                    done
+                done
+            done
         done
     done
 done
