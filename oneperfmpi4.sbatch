@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #SBATCH --partition=cpu-batch  # Partition you wish to use (see above for list)
-#SBATCH --mem=32000            # 60GB RAM
+#SBATCH --mem=60000            # 60GB RAM
 #SBATCH --exclusive=mcs        # Exclusive mode, only this job will run
 #SBATCH --time=1-00:00:00      # Job time limit set to 2 days (48 hours)
 

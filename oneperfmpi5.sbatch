@@ -6,7 +6,7 @@
 #SBATCH --time=1-00:00:00      # Job time limit set to 2 days (48 hours)
 
 #SBATCH --contiguous # Ensure nodes are allocated contiguously (not across multiple racks)
-#SBATCH --nodes=2 # Number of compute nodes used by your job
+#SBATCH --nodes=5 # Number of compute nodes used by your job
 #SBATCH --ntasks-per-node=1 # Number of tasks per node (used for MPI later)
 #SBATCH --cpus-per-task=40 # Number of CPU cores used on each task (used for OpenMP)
 
