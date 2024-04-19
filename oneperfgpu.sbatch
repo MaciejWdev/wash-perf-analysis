@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-#SBATCH --partition=cpu-batch  # Partition you wish to use (see above for list)
-#SBATCH --cpus-per-task=40     # Number of CPU threads used by your job, set this upto 40 as required.
-#SBATCH --mem=32000            # 60GB RAM
+#SBATCH --partition=falcon  # Partition you wish to use (see above for list)
+#SBATCH --cpus-per-task=12     # Number of CPU threads used by your job, set this upto 40 as required.
+#SBATCH --mem=60000            # 60GB RAM
 #SBATCH --exclusive=mcs        # Exclusive mode, only this job will run
 #SBATCH --time=1-00:00:00      # Job time limit set to 2 days (48 hours)
 #
@@ -10,10 +10,10 @@
 #SBATCH --output=out/slurms/slurm-%j.out # Standard out from your job
 #SBATCH --error=out/slurm_errs/slurm-%j.err  # Standard error from your job
 
+numthreads=$4
 program=$1
 n_particles=$2
 timestep=$3
-numthreads=$4
 
 timenow=$(date +"%N")
 
@@ -29,8 +29,8 @@ then
     # a=$(mkdir -p $outpath)
     # a=$(cd $outpath)
     # Make program be 4 back
-    # program="../../../../../sph-exa-build/main/src/sphexa/sphexa"
-    time_output=$(time -p ($program --init sedov --prop std -w 0 -o ./out/sphexa/dumps/$timenow.h5 -n $n_particles -s $timestep) 2>&1)
+    # program="../../../../../sph-exa-build/main/src/sphexa/sphexa-cuda"
+    time_output=$(time -p ($program --init sedov --prop std -w 500 -o ./out/sphexa/dumps/$timenow.h5 -n $n_particles -s $timestep) 2>&1)
     # a=$(cd -)
 else 
     time_output=$(time -p ($program $n_particles $timestep) 2>&1)
